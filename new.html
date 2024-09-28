@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rabin & Agnus Anniversary</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #fff;
+            color: #333;
+        }
+        section {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            padding: 20px;
+            scroll-snap-align: start;
+        }
+        /* Section 1: Lavender background with rings */
+        .section-1 {
+            background-color: lavender;
+            background-image: url('https://i.imgur.com/lavender-rings.png'); /* Placeholder image */
+            background-size: contain;
+            background-position: center;
+            background-repeat: no-repeat;
+            color: #333;
+            text-align: center;
+        }
+        .section-1 h1 {
+            font-size: 4em;
+            color: #4A148C; /* You can change the color here */
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.3);
+        }
+        .section-1 p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        /* Section 2: Countdown Love background */
+        .section-2 {
+            background: url('https://i.imgur.com/love-background.png') no-repeat center center fixed; /* Love background */
+            background-size: cover;
+            color: white;
+            text-align: center;
+        }
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            margin: 20px 0;
+        }
+        .circle {
+            background-color: rgba(255, 105, 180, 0.8);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.5em;
+            color: white;
+            border: 2px solid #fff;
+        }
+        /* Section 3: Wishes with surprise messages */
+        .section-3 {
+            background-color: #FFE4E1; /* Light pink background for romantic tone */
+            color: #4A148C;
+            text-align: center;
+        }
+        .section-3 p {
+            font-size: 1.5em;
+            margin: 15px 0;
+            font-style: italic;
+        }
+        /* Section 4: Slideshow for photos */
+        .section-4 {
+            background: #FFF5EE;
+            color: #333;
+            text-align: center;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 80%;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 15px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+        }
+        .slideshow-container img {
+            width: 100%;
+            border-radius: 15px;
+        }
+        /* Section 5: Greetings background */
+        .section-5 {
+            background-color: #E6E6FA; /* Lavender light */
+            color: #4A148C;
+            text-align: center;
+        }
+        footer {
+            background-color: rgba(255, 105, 180, 0.8);
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            color: white;
+            text-align: center;
+            z-index: 999;
+        }
+        nav a {
+            padding: 15px;
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="#home">Home</a>
+    <a href="#countdown">Countdown</a>
+    <a href="#wishes">Wishes</a>
+    <a href="#slideshow">Photos</a>
+    <a href="#greetings">Greetings</a>
+</nav>
+
+<!-- Section 1: Rabin & Agnus -->
+<section id="home" class="section-1">
+    <h1>Rabin & Agnus</h1>
+    <p>Celebrating Our Love</p>
+</section>
+
+<!-- Section 2: Countdown -->
+<section id="countdown" class="section-2">
+    <h2>Countdown to Our Love Anniversary</h2>
+    <div class="countdown-container">
+        <div class="circle">
+            <div id="days"></div>
+        </div>
+        <div class="circle">
+            <div id="hours"></div>
+        </div>
+        <div class="circle">
+            <div id="minutes"></div>
+        </div>
+        <div class="circle">
+            <div id="seconds"></div>
+        </div>
+    </div>
+</section>
+
+<!-- Section 3: Love Anniversary Wishes -->
+<section id="wishes" class="section-3">
+    <h2>Love Anniversary Wishes</h2>
+    <p>“My dear Agnus! Today marks another milestone in our beautiful journey. Every day with you is a gift I cherish.”</p>
+    <p>“To my love, Agnus, you have my heart, forever and always. Happy Love Anniversary!”</p>
+</section>
+
+<!-- Section 4: Photo Slideshow -->
+<section id="slideshow" class="section-4">
+    <h2>Our Beautiful Moments</h2>
+    <div class="slideshow-container">
+        <img src="images/a1.jpeg" id="slideImage" alt="Anniversary Photos">
+    </div>
+</section>
+
+<!-- Section 5: Final Greetings -->
+<section id="greetings" class="section-5">
+    <h2>Special Greetings</h2>
+    <p>“To us, to love, to eternity. Happy Anniversary, my love!”</p>
+</section>
+
+<!-- Footer -->
+<footer>
+    &copy; 2024 rabin & agnus anniversary
+</footer>
+
+<!-- JavaScript for Countdown & Slideshow -->
+<script>
+    // Countdown Script
+    var countDownDate = new Date("Oct 7, 2024 00:00:00").getTime();
+
+    function updateCountdown() {
+        var now = new Date().getTime();
+        var distance = countDownDate - now;
+
+        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        document.getElementById("days").innerHTML = days + "d";
+        document.getElementById("hours").innerHTML = hours + "h";
+        document.getElementById("minutes").innerHTML = minutes + "m";
+        document.getElementById("seconds").innerHTML = seconds + "s";
+
+        if (distance < 0) {
+            clearInterval(x);
+            document.getElementById("days").innerHTML = "00d";
+            document.getElementById("hours").innerHTML = "00h";
+            document.getElementById("minutes").innerHTML = "00m";
+            document.getElementById("seconds").innerHTML = "00s";
+        }
+    }
+    setInterval(updateCountdown, 1000);
+
+    // Slideshow Script
+    var slideIndex = 0;
+    var images = ["images/a1.jpeg", "images/a2.jpeg", "images/a3.jpeg", "images/a4.jpeg","images/a5.jpeg","images/a6.jpeg","images/a7.jpeg","images/a8.jpeg","images/a9.jpeg",];
+    function showSlides() {
+        slideIndex++;
+        if (slideIndex >= images.length) {
+            slideIndex = 0;
+        }
+        document.getElementById("slideImage").src = images[slideIndex];
+        setTimeout(showSlides, 3000); // Change image every 2 seconds
+    }
+    showSlides();
+</script>
+
+</body>
+</html>
